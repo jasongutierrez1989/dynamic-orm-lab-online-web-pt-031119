@@ -6,7 +6,6 @@ class Student < InteractiveRecord
 
 
     self.column_names.each do |column_name|
-      #turn each column name into a symbol with .to_sym
       attr_accessor column_name.to_sym
     end
 
