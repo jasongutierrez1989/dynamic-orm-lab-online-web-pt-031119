@@ -2,7 +2,6 @@ require_relative "../config/environment.rb"
 require 'active_support/inflector'
 
 class InteractiveRecord
-
   def self.table_name
     self.to_s.downcase.pluralize
   end
@@ -18,7 +17,6 @@ class InteractiveRecord
     end
     column_names.compact
   end
-
 
   def initialize(options = {})
     options.each do |key,value|
@@ -45,7 +43,7 @@ class InteractiveRecord
   def save
     sql = "INSERT INTO #{table_name_for_insert} (#{col_names_for_insert}) VALUES (#{values_for_insert})"
     DB[:conn].execute(sql)
-    self.id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
+    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM #{table_name_for_insert}")[0][0]
   end
 
   def self.find_by_name(name)
